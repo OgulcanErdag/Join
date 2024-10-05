@@ -1,0 +1,168 @@
+/**
+ * This function initializes the summary html.
+ */
+async function summaryInit() {
+    await fetchTasksJson();
+    generateCounts();
+    generateGreets();
+    generateUpcomingDate();
+    generateInitials();
+}
+
+/**
+ * This function defines and generates the numbers for counting the tasks in the different categories.
+ */
+function generateCounts() {
+    let toDo = document.getElementById('toDoCount');
+    let done = document.getElementById('doneCount');
+    let inProgress = document.getElementById('inProgressCount');
+    let awaitFeedback = document.getElementById('awaitFeedbackCount');
+    let urgent = document.getElementById('urgentCount');
+    let allTasks = document.getElementById('allTasks');
+    toDo.innerHTML = counter('to-do');
+    done.innerHTML = counter('done');
+    inProgress.innerHTML = counter('in-progress');
+    awaitFeedback.innerHTML = counter('await-feedback');
+    urgent.innerHTML = countUrgentTasks();
+    allTasks.innerHTML = countAllTasks();
+}
+
+/**
+ * This function calculates the number of tasks in a category.
+ * @param {string} category - board category
+ * @returns number of tasks in a category
+ */
+function counter(category) {
+    return tasksArray.filter(task => task.board_category === category).length;
+}
+
+/**
+ * This function calculates the number of urgent tasks.
+ * @returns number of urgent tasks
+ */
+function countUrgentTasks() {
+    return tasksArray.filter(task => task.prio === 'urgent').length;
+}
+
+/**
+ * This function calculates the number of all tasks.
+ * @returns number of all tasks
+ */
+function countAllTasks() {
+    return tasksArray.length;
+}
+
+
+/**
+ * This function fills the variables of the greeting container like daytime and name of the logged in user.
+ */
+function generateGreets() {
+    let greetingTime = getGreeting();
+    let userName = sessionStorage.getItem('userName');
+    let content = document.getElementById('greeting-container');
+    content.innerHTML = userName === "Guest"
+        ? `<span class="greet-text">Good ${greetingTime}!</span>`
+        : `<span class="greet-text">Good ${greetingTime},</span>
+                   <span class="greet-user-name">${userName}</span>`;
+}
+
+/**
+ * This function generates the greeting dependant on the date time
+ * @returns greeting dependant on the date time
+ */
+function getGreeting() {
+    let now = new Date();
+    let hours = now.getHours();
+    if (hours >= 5 && hours < 12) return "morning";
+    if (hours >= 12 && hours < 18) return "afternoon";
+    if (hours >= 18 && hours < 22) return "evening";
+    return "night";
+}
+
+
+/**
+ * This function generates the due date of the most urgent task.
+ */
+function generateUpcomingDate() {
+    let content = document.getElementById('upcomingDate');
+    content.innerHTML = getClosestUrgentDueDate();
+}
+
+/**
+ * This function calculates the due date of the most urgent task.
+ * @returns the due date of the most urgent task.
+ */
+function getClosestUrgentDueDate() {
+    let urgentTasks = tasksArray.filter(task => task.prio === 'urgent');
+    if (!urgentTasks.length) return '';
+    let closestDate = urgentTasks.reduce((acc, task) => {
+        let dueDate = new Date(task.due_date);
+        let diff = dueDate - new Date();
+        return (diff >= 0 && diff < acc.diff) ? { date: dueDate, diff: diff } : acc;
+    }, { date: null, diff: Infinity }).date;
+    return closestDate ? closestDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+}
+
+
+
+/**
+ * Displays a greeting animation.
+ */
+function showGreeting() {
+    const animationScreen = document.getElementById('animationScreen');
+    let greetingTime = getGreeting();
+    let userName = sessionStorage.getItem('userName');
+    animationScreen.innerHTML = userName === "Guest"
+        ? `<span class="greet-text">Good ${greetingTime}</span>`
+        : `<div class="greeting-user-animation"><span class="greet-text">Good ${greetingTime},</span>
+           <span class="greet-user-name">${userName}</div></span>`;
+    animationScreen.classList.remove('d-none');
+    animationScreen.classList.add('fadeIn');
+    setTimeout(hideGreeting, 1000);
+}
+
+/**
+ * Hides the greeting animation.
+ */
+function hideGreeting() {
+    const animationScreen = document.getElementById('animationScreen');
+    const summaryCardContainer = document.querySelector('.summary-card-container');
+    animationScreen.classList.remove('fadeIn');
+    animationScreen.classList.add('fadeOut');
+    setTimeout(() => {
+        animationScreen.classList.add('hidden');
+        if (summaryCardContainer) summaryCardContainer.classList.add('visible');
+    }, 1000);
+}
+
+/**
+ * Initializes the page based on window width.
+ */
+function initPage() {
+    const animationScreen = document.getElementById('animationScreen');
+    const summaryCardContainer = document.querySelector('.summary-card-container');
+    if (window.innerWidth >= 800) {
+        localStorage.setItem('greetingShown', 'true');
+        summaryCardContainer.classList.add('visible');
+    } else {
+        if (!localStorage.getItem('greetingShown')) {
+            localStorage.setItem('greetingShown', 'true');
+            showGreeting();
+        } else {
+            summaryCardContainer.classList.add('visible');
+        }
+    }
+}
+
+/**
+ * This function runs initPage when DOM is loaded.
+ */
+document.addEventListener('DOMContentLoaded', initPage);
+
+
+/**
+ * This function removes local storage item greetingShown.
+ */
+function logout() {
+    localStorage.removeItem('greetingShown');
+}
