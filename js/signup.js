@@ -5,20 +5,19 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase
 import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBLwkvdC-k--cb_0Z5y83ZEtcbRiXMxxKE",
-    authDomain: "join-23123.firebaseapp.com",
-    databaseURL: "https://join-database-3d39f-default-rtdb.europe-west1.firebasedatabase.app/",
-    projectId: "join-23123",
-    storageBucket: "join-23123.appspot.com",
-    messagingSenderId: "801789402962",
-    appId: "1:801789402962:web:d84538bda53119e058e48b",
-    measurementId: "G-CFY9BZ9NV5"
-  };
+    apiKey: "AIzaSyB3_DBAy3979d7LNIvPqTD1dRi1c_6oMrg",
+    authDomain: "join-e1bdb.firebaseapp.com",
+    databaseURL: "https://join-e1bdb-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "join-e1bdb",
+    storageBucket: "join-e1bdb.firebasestorage.app",
+    messagingSenderId: "596387909364",
+    appId: "1:596387909364:web:e3ca2be6dbe346ed0bd8a1"
+};
 
 /**
  * Navigates the browser window to the 'index.html' page.
  */
-  function navigateBack() {
+function navigateBack() {
     window.location.href = 'index.html';
 }
 
@@ -39,7 +38,7 @@ function init() {
     const signupForm = document.getElementById('signupForm');
     const signupButton = document.getElementById('signupButton');
     const acceptPolicyImage = document.getElementById('acceptPolicy');
- 
+
     if (signupForm && signupButton && acceptPolicyImage) {
         setupFormSubmission(signupForm);
     }
@@ -57,7 +56,7 @@ function toggleCheckboxImage() {
         signupButton.disabled = false;
     } else {
         image.src = 'img/Rectangle1.png';
-        signupButton.disabled = true;        
+        signupButton.disabled = true;
     }
 }
 
@@ -129,12 +128,12 @@ function signupUser(name, email, password) {
         email: email,
         password: password
     })
-    .then(() => {
-        signupSuccessfully()
-    })
-    .catch(() => {
-        alert('Error signing up, please try again.');
-    });
+        .then(() => {
+            signupSuccessfully()
+        })
+        .catch(() => {
+            alert('Error signing up, please try again.');
+        });
 }
 
 /**
@@ -143,10 +142,10 @@ function signupUser(name, email, password) {
 function signupSuccessfully() {
     const successMessage = document.getElementById('successMessage');
     successMessage.classList.add('show');
-  
-    setTimeout(function() {
-      successMessage.classList.remove('show');
-      window.location.href = 'index.html';
+
+    setTimeout(function () {
+        successMessage.classList.remove('show');
+        window.location.href = 'index.html';
     }, 3000);
 };
 

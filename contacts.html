@@ -17,19 +17,19 @@
   <header>
     <div class="header-content">
       <img onclick="goToSummary()" style="cursor: pointer" class="d-none" src="img/logo-dark.png" alt="">
-        <p>Kanban Project Management Tool</p>
-        <div class="header-icons">
-            <img onclick="goToHelp()" class="header-help" src="../img/help.svg" alt="questionmark" />
-            <div id="user-logo" onclick="toggleMenu()" class="header-user-name"></div>
-        </div>
+      <p>Kanban Project Management Tool</p>
+      <div class="header-icons">
+        <img onclick="goToHelp()" class="header-help" src="../img/help.svg" alt="questionmark" />
+        <div id="user-logo" onclick="toggleMenu()" class="header-user-name"></div>
+      </div>
     </div>
-</header>
+  </header>
 
-<div class="user-content" id="user-content">
-  <a onclick="goToLegalNotice()" href="#">Legal Notice</a>
-  <a onclick="goToPrivacyPolicy()"href="#">Privacy Policy</a>
-  <a onclick="logOut()" href="index.html">Log Out</a>
-</div>
+  <div class="user-content" id="user-content">
+    <a onclick="goToLegalNotice()" href="#">Legal Notice</a>
+    <a onclick="goToPrivacyPolicy()" href="#">Privacy Policy</a>
+    <a onclick="logOut()" href="index.html">Log Out</a>
+  </div>
 
 
   <div class="sidebar">
@@ -58,25 +58,25 @@
 
   <div class="contacts-library" id="contacts-library">
     <!-- Der Container ist für Responsive-->
-    <div class="responsive-add-contact" onclick="openAddContactLayer()"> 
-      <img src="./img/person_add.svg" alt=""> 
-    </div> 
+    <div class="responsive-add-contact" onclick="openAddContactLayer()">
+      <img src="./img/person_add.svg" alt="">
+    </div>
     <div class="button-add-contact" onclick="openAddContactLayer()">
       Add new contact
       <img src="img/person_add.svg" alt="">
     </div>
     <div id="contacts-list" class="contacts-list">
-      
+
     </div>
   </div>
 
- 
+
 
   <div class="contact-details-container">
     <a class="back" href="contacts.html">
-      <img class="arrow" src="./img/arrow-left-line.svg"/>
-  </a>
-    <div class="contact-headline" >
+      <img class="arrow" src="./img/arrow-left-line.svg" />
+    </a>
+    <div class="contact-headline">
       <h1>Contacts</h1>
       <div class="blue-vertical-line"></div>
       <h2 class="subheadline">Better with a team</h2>
@@ -116,15 +116,17 @@
                 <img class="icon" src="img/add-contact-form-mail.svg" alt="email icon">
               </div>
               <div class="input-container">
-                <input placeholder="Phone" id="add-contact-phone" required type="tel" pattern="^(\+49\s?\(?0?\)?\s?\d{3}\s?\d{1,}|^\d{4}\s?\d{1,})$" title="Please enter a valid phone number in one of the following formats: 01626963474, 0162 6963474, +49 162 6963474, +49 (0)162 6963474">
+                <input placeholder="Phone" id="add-contact-phone" required type="tel"
+                  pattern="^(\+49\s?\(?0?\)?\s?\d{3}\s?\d{1,}|^\d{4}\s?\d{1,})$"
+                  title="Please enter a valid phone number in one of the following formats: 01626963474, 0162 6963474, +49 162 6963474, +49 (0)162 6963474">
 
                 <img class="icon" src="img/add-contact-form-phone.svg" alt="phone icon">
               </div>
               <div class="button-group">
                 <button class="button-bright" type="button" onclick="closeAddContactLayer()">Cancel <img
                     class="contact-icon" src="img/add-contact-close.svg" alt=""></button>
-                <button class="button-dark button-dark-contact" type="submit">Create contact <img src="img/add-contact-check.svg"
-                    alt=""></button>
+                <button class="button-dark button-dark-contact" type="submit">Create contact <img
+                    src="img/add-contact-check.svg" alt=""></button>
               </div>
             </form>
           </div>
@@ -165,13 +167,16 @@
                 <img class="icon" src="img/add-contact-form-mail.svg" alt="email icon">
               </div>
               <div class="input-container">
-                <input placeholder="Phone" id="edit-contact-phone" required type="tel" pattern="^(\+49\s?\(?0?\)?\s?\d{3}\s?\d{1,}|^\d{4}\s?\d{1,})$" title="Please enter a valid phone number in one of the following formats: 01626963474, 0162 6963474, +49 162 6963474, +49 (0)162 6963474">
+                <input placeholder="Phone" id="edit-contact-phone" required type="tel"
+                  pattern="^(\+49\s?\(?0?\)?\s?\d{3}\s?\d{1,}|^\d{4}\s?\d{1,})$"
+                  title="Please enter a valid phone number in one of the following formats: 01626963474, 0162 6963474, +49 162 6963474, +49 (0)162 6963474">
                 <img class="icon" src="img/add-contact-form-phone.svg" alt="phone icon">
               </div>
               <div class="button-group">
                 <button class="button-bright" type="button" onclick="closeEditContactLayer()">Cancel <img
                     class="contact-icon" src="img/add-contact-close.svg" alt=""></button>
-                <button class="button-dark button-dark-contact" type="submit">Save<img src="img/add-contact-check.svg" alt=""></button>
+                <button class="button-dark button-dark-contact" type="submit">Save<img src="img/add-contact-check.svg"
+                    alt=""></button>
               </div>
             </form>
           </div>

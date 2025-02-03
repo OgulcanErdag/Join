@@ -1,4 +1,4 @@
-const CONTACTS_URL = "https://join-database-3d39f-default-rtdb.europe-west1.firebasedatabase.app/contacts/";
+const CONTACTS_URL = "https://join-e1bdb-default-rtdb.europe-west1.firebasedatabase.app/contacts/";
 
 let contactsData = {};
 let contactsArray = [];
@@ -90,7 +90,7 @@ async function postData(path = "", data = {}) {
   try {
     let response = await fetch(CONTACTS_URL + path + ".json", {
       method: "POST",
-      headers: {"Content-Type": "application/json",},
+      headers: { "Content-Type": "application/json", },
       body: JSON.stringify(data),
     });
     return await response.json();
@@ -171,7 +171,8 @@ async function saveContact() {
     closeEditContactLayer();
     displayUpdatedContact(name, updatedContact, key);
   } catch (error) {
-    console.error("Error updating contact:", error);}
+    console.error("Error updating contact:", error);
+  }
 }
 
 /**
@@ -196,7 +197,8 @@ async function updateContact(key, updatedContact) {
     let response = await fetch(CONTACTS_URL + key + ".json", {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",},
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(updatedContact),
     });
     return await response.json();

@@ -1,4 +1,4 @@
-const TASKS_URL = "https://join-database-3d39f-default-rtdb.europe-west1.firebasedatabase.app/tasks/";
+const TASKS_URL = "https://join-e1bdb-default-rtdb.europe-west1.firebasedatabase.app/tasks/";
 
 let tasksData = {};
 let tasksArray = [];
@@ -40,7 +40,7 @@ async function fetchTasksJson() {
  * This function renders the task cards in board.html. First it defines all board IDs for the different categorys. Then it clears all Boards and renders the cards.
  */
 function createTaskOnBoard() {
-  const boardIds = {"to-do": "to-do", "in-progress": "in-progress", "await-feedback": "await-feedback", done: "done",};
+  const boardIds = { "to-do": "to-do", "in-progress": "in-progress", "await-feedback": "await-feedback", done: "done", };
   clearBoards(boardIds);
 
   for (let i = 0; i < tasksArray.length; i++) {
@@ -290,7 +290,7 @@ async function updateTaskAttribute(key, newBoardCategory, urlSuffix) {
   try {
     let response = await fetch(TASKS_URL + key + "/" + urlSuffix + ".json", {
       method: "PUT",
-      headers: {"Content-Type": "application/json",},
+      headers: { "Content-Type": "application/json", },
       body: JSON.stringify(newBoardCategory),
     });
     return await response.json();
@@ -311,7 +311,7 @@ function moveTask(direction, taskKey) {
   const currentCategoryElement = taskElement.closest(".task-area");
   const currentCategory = currentCategoryElement.id;
   let currentIndex = categoryOrder.indexOf(currentCategory);
-  
+
   if (direction === "up") {
     currentIndex = currentIndex === 0 ? categoryOrder.length - 1 : currentIndex - 1;
   } else if (direction === "down") {
@@ -332,7 +332,7 @@ async function postTask(path = "", data = {}) {
   try {
     let response = await fetch(TASKS_URL + path + ".json", {
       method: "POST",
-      headers: {"Content-Type": "application/json",},
+      headers: { "Content-Type": "application/json", },
       body: JSON.stringify(data),
     });
     return await response.json();
